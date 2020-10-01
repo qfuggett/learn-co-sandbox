@@ -1,5 +1,5 @@
 class Anime
-  attr_accessor :name, :description, :keyword
+  attr_accessor :name, :description, :keyword, :anime
   
   @@all = [ ]
   

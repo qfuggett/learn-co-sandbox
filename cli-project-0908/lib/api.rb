@@ -10,13 +10,11 @@ class API
     animeshows.each do |a|
       Anime.new(name: a["title"], description: a["synopsis"], keyword: keyword) if a["title"] != nil
     end
-  end
-  
-  
-  def self.get_show(anime)
     #binding.pry
-  
+
   end
+  
+
   
 end
 

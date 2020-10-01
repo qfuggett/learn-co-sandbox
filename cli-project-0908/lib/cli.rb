@@ -1,4 +1,5 @@
 class CLI
+  attr_accessor :anime
   
   def menu
     puts ""
@@ -8,23 +9,23 @@ class CLI
     puts "Enter a keyword to pull up a list of recommendations:"
     @keyword = gets.strip.downcase
     API.get_anime(@keyword)
-    Anime.find_by_keyword(@keyword)
     print_anime
     prompt
 
     input = gets.strip.downcase
     while input != 'exit' do
       if input == 'keyword'
-        @keyword == gets.strip.downcase
+        #@keyword == gets.strip.downcase
         API.get_anime(@keyword) if Anime.find_by_keyword(@keyword).length == 0 
         print_anime
-      end
-    end
+        prompt
+    
       elsif input.to_i > 0 && input.to_i <= Anime.find_by_keyword(@keyword).count
-        anime = Anime.find_by_keyword(@keyword)[input.to_i-1]
+      #binding.pry Anime.all entire array of objects
+        @anime = Anime.find_by_keyword(@keyword)[input.to_i-1]
         API.get_anime(anime) if !anime.name
-        print_anime(anime)
-        
+        print_anime_show
+
       else
         puts "Invalid input. Please try again!"
       end
@@ -49,6 +50,10 @@ class CLI
     Anime.find_by_keyword(@keyword).each.with_index do |a, i|
       puts "#{i}. #{a.name}"
     end
+  end
+  
+  def print_anime_show
+    puts @anime
   end
   
   
